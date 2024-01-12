@@ -3,7 +3,6 @@ import {
   Navigate, Routes, Route, useParams,
 } from 'react-router-dom';
 import { PageWrap } from '@edx/frontend-platform/react';
-import Placeholder from '@edx/frontend-lib-content-components';
 import CourseAuthoringPage from './CourseAuthoringPage';
 import { PagesAndResources } from './pages-and-resources';
 import EditorContainer from './editors/EditorContainer';
@@ -16,8 +15,10 @@ import ScheduleAndDetails from './schedule-and-details';
 import { GradingSettings } from './grading-settings';
 import CourseTeam from './course-team/CourseTeam';
 import { CourseUpdates } from './course-updates';
+import { CourseUnit } from './course-unit';
 import CourseExportPage from './export-page/CourseExportPage';
 import CourseImportPage from './import-page/CourseImportPage';
+import { DECODED_ROUTES } from './constants';
 
 /**
  * As of this writing, these routes are mounted at a path prefixed with the following:
@@ -69,10 +70,12 @@ const CourseAuthoringRoutes = () => {
           path="custom-pages/*"
           element={<PageWrap><CustomPages courseId={courseId} /></PageWrap>}
         />
-        <Route
-          path="/container/:blockId"
-          element={process.env.ENABLE_UNIT_PAGE === 'true' ? <PageWrap><Placeholder /></PageWrap> : null}
-        />
+        {DECODED_ROUTES.COURSE_UNIT.map((path) => (
+          <Route
+            path={path}
+            element={process.env.ENABLE_UNIT_PAGE === 'true' ? <PageWrap><CourseUnit courseId={courseId} /></PageWrap> : null}
+          />
+        ))}
         <Route
           path="editor/course-videos/:blockId"
           element={process.env.ENABLE_NEW_EDITOR_PAGES === 'true' ? <PageWrap><VideoSelectorContainer courseId={courseId} /></PageWrap> : null}

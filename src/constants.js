@@ -20,6 +20,7 @@ export const BADGE_STATES = {
 };
 
 export const NOTIFICATION_MESSAGES = {
+  adding: 'Adding',
   saving: 'Saving',
   duplicating: 'Duplicating',
   deleting: 'Deleting',
@@ -34,4 +35,11 @@ export const COURSE_CREATOR_STATES = {
   granted: 'granted',
   denied: 'denied',
   disallowedForThisSite: 'disallowed_for_this_site',
+};
+
+export const DECODED_ROUTES = {
+  COURSE_UNIT: [
+    '/container/:blockId/:sequenceId',
+    '/container/:blockId',
+  ],
 };
